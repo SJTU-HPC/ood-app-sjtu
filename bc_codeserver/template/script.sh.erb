@@ -1,0 +1,50 @@
+#!/usr/bin/env bash
+<%
+
+# Set our working directory.
+working_dir = Pathname.new(context.working_dir)
+
+# Ensure that code-server always starts up in either a user defined directory or the home directory.
+if ! working_dir.exist?
+    working_dir = Pathname.new(ENV['HOME'])
+elsif working_dir.file?
+    working_dir = working_dir.parent
+end
+%>
+
+# Setup environment.
+CODE_SERVER_DATAROOT="$HOME/.local/share/bc_osc_codeserver"
+
+# Ensure a dataroot for Code Server.
+mkdir -p "$CODE_SERVER_DATAROOT/extensions"
+
+# Expose the password to the server.
+export PASSWORD="$password"
+
+# Print compute node.
+echo "$(date): Running on compute node ${compute_node}:$port"
+
+# VSCode complains that system git is too old.
+module load git
+
+echo ""
+
+#
+# Start Code Server.
+#
+echo "$(date): Started code-server"
+echo ""
+
+export SINGULARITYENV_CODE_SERVER_DATAROOT=$CODE_SERVER_DATAROOT
+export SINGULARITYENV_PASSWORD=$PASSWORD
+
+CODE_IMG="/lustre/share/img/ood-app/coder.sif"
+
+singularity run ${CODE_IMG} code-server \
+    --auth="password" \
+    --bind-addr="0.0.0.0:${port}" \
+    --disable-telemetry \
+    --extra-extensions-dir="$CODE_SERVER_DATAROOT/extensions" \
+    --user-data-dir="$CODE_SERVER_DATAROOT" \
+    --log debug \
+    "<%= working_dir.to_s %>"

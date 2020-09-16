@@ -1,0 +1,23 @@
+---
+cluster: "sjtu"
+attributes:
+  desktop: "xfce"
+  bc_vnc_idle: 0
+  bc_vnc_resolution:
+    required: true
+  bc_queue: small
+  instance_size:
+    widget: "select"
+    label: "Desktop Instance Size"
+    options:
+      - [ "1core" ]
+      - [ "16core" ]
+      - [ "40core" ]
+
+form:
+  - desktop
+  - bc_vnc_idle
+  - bc_vnc_resolution
+  - bc_num_hours
+  - instance_size
+  - bc_queue

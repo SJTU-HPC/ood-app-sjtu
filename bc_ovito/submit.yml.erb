@@ -1,0 +1,24 @@
+---
+batch_connect:
+  template: "vnc"
+script:
+  <%- if instance_size == "40core" -%>
+  queue_name: "cpu"
+  <%- end -%>
+  native:
+    <%- if instance_size == "1core" -%>
+    - "-J studio_ovito_1core"
+    - "-n 1"
+    <%- end -%>
+    <%- if instance_size == "8core" -%>
+    - "-J studio_ovito_8core"
+    - "-n 8"
+    <%- end -%>
+    <%- if instance_size == "16core" -%>
+    - "-J studio_ovito_16core"
+    - "-n 16"
+    <%- end -%>
+    <%- if instance_size == "40core" -%>
+    - "-J studio_ovito_40core"
+    - "--exclusive"
+    <%- end -%>

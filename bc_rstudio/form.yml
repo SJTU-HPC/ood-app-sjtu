@@ -1,0 +1,17 @@
+---
+cluster: "sjtu"
+attributes:
+  bc_queue: small
+  instance_size:
+    widget: "select"
+    label: "Instance Size"
+    options:
+      - [ "1core" ]
+      - [ "8core" ]
+      - [ "16core" ]
+      - [ "40core" ]
+
+form:
+  - bc_num_hours
+  - bc_queue
+  - instance_size

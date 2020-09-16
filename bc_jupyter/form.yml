@@ -1,0 +1,29 @@
+---
+cluster: "sjtu"
+attributes:
+  bc_queue: small
+  node_type: null
+  version: null
+  jupyterlab_switch:
+    widget: "check_box"
+    label: "Use JupyterLab instead of Jupyter Notebook?"
+    help: |
+      JupyterLab is the next generation of Jupyter, and is completely compatible with existing Jupyter Notebooks.
+  instance_size:
+    widget: "select"
+    label: "Desktop Instance Size"
+    options:
+      - [ "1core" ]
+      - [ "8core" ]
+      - [ "40core" ]
+      - [ "1gpu" ]
+      - [ "4gpu" ]
+      - [ "8gpu" ]
+
+form:
+  - node_type
+  - version
+  - jupyterlab_switch
+  - bc_num_hours
+  - bc_queue
+  - instance_size

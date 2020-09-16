@@ -1,0 +1,47 @@
+---
+batch_connect:
+  template: vnc
+script:
+  <%- if instance_size == "40core" -%>
+  queue_name: "cpu"
+  <%- end -%>
+  <%- if instance_size == "1gpu" -%>
+  queue_name: "dgx2"
+  <%- end -%>
+  <%- if instance_size == "4gpu" -%>
+  queue_name: "dgx2"
+  <%- end -%>
+  <%- if instance_size == "8gpu" -%>
+  queue_name: "dgx2"
+  <%- end -%>
+  native:
+    <%- if instance_size == "1core" -%>
+    - "-J studio_desktop_1core"
+    - "-n 1"
+    <%- end -%>
+    <%- if instance_size == "8core" -%>
+    - "-J studio_desktop_8core"
+    - "-n 8"
+    <%- end -%>
+    <%- if instance_size == "40core" -%>
+    - "-J studio_desktop_40core"
+    - "--exclusive"
+    <%- end -%>
+    <%- if instance_size == "1gpu" -%>
+    - "-J studio_desktop_gpu"
+    - "-N 1"
+    - "-n 6"
+    - "--gres=gpu:1"
+    <%- end -%>
+    <%- if instance_size == "4gpu" -%>
+    - "-J studio_desktop_gpu"
+    - "-N 1"
+    - "-n 24"
+    - "--gres=gpu:4"
+    <%- end -%>
+    <%- if instance_size == "8gpu" -%>
+    - "-J studio_desktop_gpu"
+    - "-N 1"
+    - "-n 48"
+    - "--gres=gpu:8"
+    <%- end -%>

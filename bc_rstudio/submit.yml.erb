@@ -1,0 +1,24 @@
+---
+batch_connect:
+  template: "basic"
+script:
+  <%- if instance_size == "40core" -%>
+  queue_name: "cpu"
+  <%- end -%>
+  native:
+    <%- if instance_size == "1core" -%>
+    - "-J studio_rstudio_1core"
+    - "-n 1"
+    <%- end -%>
+    <%- if instance_size == "8core" -%>
+    - "-J studio_rstudio_8core"
+    - "-n 8"
+    <%- end -%>
+    <%- if instance_size == "16core" -%>
+    - "-J studio_rstudio_16core"
+    - "-n 16"
+    <%- end -%>
+    <%- if instance_size == "40core" -%>
+    - "-J studio_rstudio_40core"
+    - "--exclusive"
+    <%- end -%>

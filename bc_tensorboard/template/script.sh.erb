@@ -1,0 +1,21 @@
+#!/usr/bin/env bash
+
+# Benchmark info
+echo "TIMING - Starting main script at: $(date)"
+
+# Set working directory to home directory
+cd "${HOME}"
+
+#
+# Start Tensorboard Server
+#
+
+# Benchmark info
+echo "TIMING - Starting tensorboard container at: $(date)"
+
+# Launch the Tensorboard Server
+set -x
+
+TB_IMG="/lustre/share/img/tensorflow-2.0.0.simg"
+
+singularity run --bind <%= context.working_dir %>:/log ${TB_IMG} tensorboard --logdir="/log" --port ${port}

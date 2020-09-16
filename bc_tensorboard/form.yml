@@ -1,0 +1,15 @@
+---
+cluster: "sjtu"
+attributes:
+  bc_queue: small
+  working_dir:
+    label: "Log directory with TF log files"
+    data-filepicker: true
+    data-target-file-type: dirs  # Valid values are: files, dirs, or both
+    readonly: false
+    help: "Select your project directory; defaults to $HOME"
+
+form:
+  - bc_queue
+  - bc_num_hours
+  - working_dir

@@ -1,0 +1,30 @@
+---
+batch_connect:
+  template: vnc
+script:
+  <%- if instance_size == "cpu" -%>
+  queue_name: "cpu"
+  <%- end -%>
+  native:
+    <%- if instance_size == "cpu" -%>
+    - "-J studio_relion_cpu"
+    - "--exclusive"
+    <%- end -%>
+    <%- if instance_size == "1gpu" -%>
+    - "-J studio_relion_1gpu"
+    - "-N 1"
+    - "-n 6"
+    - "--gres=gpu:1"
+    <%- end -%>
+    <%- if instance_size == "4gpu" -%>
+    - "-J studio_relion_4gpu"
+    - "-N 1"
+    - "-n 24"
+    - "--gres=gpu:4"
+    <%- end -%>
+    <%- if instance_size == "8gpu" -%>
+    - "-J studio_relion_8gpu"
+    - "-N 1"
+    - "-n 48"
+    - "--gres=gpu:8"
+    <%- end -%>

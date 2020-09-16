@@ -1,0 +1,22 @@
+# Job submission configuration file
+#
+---
+
+#
+# Configure the content of the job script for the batch job here
+# @see http://www.rubydoc.info/gems/ood_core/OodCore/BatchConnect/Template
+#
+batch_connect:
+  # We use the basic web server template for generating the job script
+  #
+  # @note Do not change this unless you know what you are doing!
+  template: "basic"
+
+#
+# Configure the job script submission parameters for the batch job here
+# @see http://www.rubydoc.info/gems/ood_core/OodCore/Job/Script
+#
+script:
+  native:
+    - "-n2"
+    - "-J studio_coder"

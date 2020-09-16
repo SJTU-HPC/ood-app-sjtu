@@ -1,0 +1,25 @@
+---
+cluster: "sjtu"
+
+attributes:
+  desktop: "xfce"
+  bc_vnc_idle: 0
+  bc_vnc_resolution:
+    required: true
+  bc_queue: dgx2
+  instance_size:
+    widget: "select"
+    label: "Desktop Instance Size"
+    options:
+      - [ "cpu" ]
+      - [ "1gpu" ]
+      - [ "4gpu" ]
+      - [ "8gpu" ]
+
+form:
+  - bc_vnc_idle
+  - desktop
+  - bc_num_hours
+  - bc_vnc_resolution
+  - bc_queue
+  - instance_size

@@ -1,0 +1,10 @@
+---
+name: Octave
+category: Interactive Apps
+subcategory: GUIs
+role: batch_connect
+description: |
+  This app will launch a GNU Octave GUI on the SJTU Cluster using a **shared
+  node**. You will be able to interact with the GNU Octave GUI through a VNC
+  session.
+

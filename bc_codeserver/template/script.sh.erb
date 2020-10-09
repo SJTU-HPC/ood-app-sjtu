@@ -40,6 +40,8 @@ export SINGULARITYENV_PASSWORD=$PASSWORD
 
 CODE_IMG="/lustre/share/img/ood-app/coder.sif"
 
+export NODE_OPTIONS=--max_old_space_size=8192
+
 singularity run ${CODE_IMG} code-server \
     --auth="password" \
     --bind-addr="0.0.0.0:${port}" \

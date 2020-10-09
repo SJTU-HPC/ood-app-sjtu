@@ -16,6 +16,6 @@ echo "TIMING - Starting tensorboard container at: $(date)"
 # Launch the Tensorboard Server
 set -x
 
-TB_IMG="/lustre/share/img/tensorflow-2.0.0.simg"
+TB_IMG="/lustre/share/singularity/modules/tensorflow/2.2.0.sif"
 
 singularity run --bind <%= context.working_dir %>:/log ${TB_IMG} tensorboard --logdir="/log" --port ${port}

@@ -23,6 +23,6 @@ cd "${HOME}"
 # Launch Octave
 set -x
 
-OCTAVE_IMG="/lustre/share/img/modules/octave/5.2.0.sif"
+module load octave
 
-singularity exec $OCTAVE_IMG octave --gui
+octave --gui

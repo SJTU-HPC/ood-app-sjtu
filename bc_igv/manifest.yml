@@ -1,0 +1,10 @@
+---
+name: IGV
+category: Interactive Apps
+subcategory: GUIs
+role: batch_connect
+description: |
+  This app will launch a IGV on the SJTU Cluster using a **shared
+  node**. You will be able to interact with the IGV through a VNC
+  session.
+

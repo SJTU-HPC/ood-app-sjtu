@@ -9,5 +9,5 @@ deploy plugins:
     - master
     - merge_request
   script:
-    - sudo cp -r ./bc_igv /var/www/ood/apps/sys/
+    - for f in `ls`; do rm -rf /var/www/ood/apps/sys/$f; cp $f /var/www/ood/apps/sys/; done
 

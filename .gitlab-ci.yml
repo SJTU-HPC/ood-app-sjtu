@@ -9,5 +9,5 @@ deploy plugins:
     - master
     - merge_request
   script:
-    - sudo cp -r ./* /var/www/ood/apps/sys/
+    - rsync -avr --progress ./* /var/www/ood/apps/sys/
 

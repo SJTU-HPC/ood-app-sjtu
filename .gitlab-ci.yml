@@ -9,5 +9,5 @@ deploy plugins:
     - master
     - merge_request
   script:
-    - rsync -avr --progress ood-app-sjtu/ /var/www/ood/apps/sys/
+    - rsync -avr --progress ./ /var/www/ood/apps/sys/
 

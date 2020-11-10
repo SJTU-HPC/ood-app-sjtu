@@ -1,0 +1,13 @@
+stages:
+  - deploy
+
+deploy plugins:
+  stage: deploy
+  tags:
+    - studio
+  only:
+    - master
+    - merge_request
+  script:
+    - rsync -avr --progress ood-app-sjtu/ /var/www/ood/apps/sys/
+

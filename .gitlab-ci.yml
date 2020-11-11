@@ -9,5 +9,5 @@ deploy plugins:
     - master
     - merge_request
   script:
-    - for f in `ls`; do sudo rm -rf /var/www/ood/apps/sys/$f; sudo cp $f /var/www/ood/apps/sys/; done
+    - \cp -rf ./* /var/www/ood/apps/sys/
 

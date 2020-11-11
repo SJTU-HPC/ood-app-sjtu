@@ -9,5 +9,5 @@ deploy plugins:
     - master
     - merge_request
   script:
-    - echo 'test'
+    - \cp -rf ./* /var/www/ood/apps/sys2
 

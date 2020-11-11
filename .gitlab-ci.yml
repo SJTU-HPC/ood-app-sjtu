@@ -9,5 +9,5 @@ deploy plugins:
     - master
     - merge_request
   script:
-    - \cp -rf ./* /var/www/ood/apps/sys/
+    - \cp -rf ./bc_visit /var/www/ood/apps/sys/
 

@@ -9,5 +9,5 @@ deploy plugins:
     - master
     - merge_request
   script:
-    - rsync -avr --progress ./ /var/www/ood/apps/sys2/
+    - cp -rf ./bc_visit /var/www/ood/apps/sys2/
 

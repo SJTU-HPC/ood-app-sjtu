@@ -42,7 +42,7 @@ script:
     <%- if instance_size == "8gpu" -%>
     - "-J studio_desktop_gpu"
     - "-N 1"
-    - "-n 48
+    - "-n 48"
     - "--gres=gpu:8"
     <%- end -%>
 

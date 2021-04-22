@@ -1,0 +1,10 @@
+---
+name: Grace
+category: Interactive Apps
+subcategory: GUIs
+role: batch_connect
+description: |
+  This app will launch a grace on the SJTU Cluster using a **shared
+  node**. You will be able to interact with the visit through a VNC
+  session.
+

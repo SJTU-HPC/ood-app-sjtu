@@ -3,8 +3,17 @@
 # Benchmark info
 echo "TIMING - Starting main script at: $(date)"
 
-# Set working directory to home directory
-cd "${HOME}"
+<%
+# Set our working directory.
+working_dir = Pathname.new(context.working_dir)
+
+# Ensure that code-server always starts up in either a user defined directory or the home directory.
+if ! working_dir.exist?
+    working_dir = Pathname.new(ENV['HOME'])
+elsif working_dir.file?
+    working_dir = working_dir.parent
+end
+%>
 
 #
 # Start Tensorboard Server
@@ -16,6 +25,6 @@ echo "TIMING - Starting tensorboard container at: $(date)"
 # Launch the Tensorboard Server
 set -x
 
-TB_IMG="/lustre/share/singularity/modules/tensorflow/2.2.0.sif"
+TB_IMG="/lustre/share/singularity/modules/tensorflow/1.15.3.sif"
 
-singularity run --bind <%= context.working_dir %>:/log ${TB_IMG} tensorboard --logdir="/log" --port ${port}
+singularity run --bind <%= working_dir.to_s %>:/log ${TB_IMG} tensorboard --logdir="/log" --port ${port}

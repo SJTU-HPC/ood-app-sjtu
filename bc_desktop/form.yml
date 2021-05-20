@@ -13,8 +13,8 @@ attributes:
     label: "Desktop Instance Size"
     options:
       - [ "1core-desktop" ]
-      - [ "8core-desktop" ]
-      - [ "16core-desktop" ]
+      - [ "10core-desktop" ]
+      - [ "20core-desktop" ]
       - [ "40core-desktop" ]
       - [ "gpu-desktop" ]
 

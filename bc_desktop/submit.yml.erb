@@ -13,13 +13,13 @@ script:
     - "-J studio_desktop_1core"
     - "-n 1"
     <%- end -%>
-    <%- if instance_size == "8core-desktop" -%>
-    - "-J studio_desktop_8core"
-    - "-n 8"
+    <%- if instance_size == "10core-desktop" -%>
+    - "-J studio_desktop_10core"
+    - "-n 10"
     <%- end -%>
-    <%- if instance_size == "16core-desktop" -%>
-    - "-J studio_desktop_16core"
-    - "-n 16"
+    <%- if instance_size == "20core-desktop" -%>
+    - "-J studio_desktop_20core"
+    - "-n 20"
     <%- end -%>
     <%- if instance_size == "40core-desktop" -%>
     - "-J studio_desktop_40core"

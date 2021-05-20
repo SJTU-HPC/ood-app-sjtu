@@ -1,0 +1,91 @@
+#!/usr/bin/env bash
+
+<%-
+working_dir_host = '${PWD}'
+working_dir_container = working_dir_host
+optional_tutorial_home_bind = ''
+%>
+
+#
+# Load the required environment
+#
+
+setup_env () {
+  module purge
+
+  # The rserver container module should set these environment variables:
+
+  SINGULARITY_BINDPATH="/etc,/media,/mnt,/opt,/run,/srv,/usr,/var,/users"
+  RSTUDIO_SERVER_IMAGE="/lustre/share/img/ood-app/rstudio-4.0.sif"
+  PATH="$PATH:/usr/lib/rstudio-server/bin"
+  export SINGULARITYENV_PATH="$PATH"
+  export SINGULARITYENV_LD_LIBRARY_PATH="$LD_LIBRARY_PATH"
+}
+setup_env
+
+
+#
+# Start RStudio Server
+#
+
+# PAM auth helper used by RStudio
+export RSTUDIO_AUTH="<%= working_dir_container %>/bin/auth"
+
+# Confirm password environment variable exists
+ if [[ -z ${RSTUDIO_PASSWORD} ]]; then
+   echo "The environment variable RSTUDIO_PASSWORD is not set" > "<%= working_dir_container %>/auth.log" 2>&1
+   exit 1
+ fi
+echo ${USER}
+echo ${RSTUDIO_PASSWORD}
+# Generate an `rsession` wrapper script
+export RSESSION_WRAPPER_FILE="<%= working_dir_container %>/rsession.sh"
+(
+umask 077
+sed 's/^ \{2\}//' > "<%= working_dir_host %>/rsession.sh" << EOL
+  #!/usr/bin/env bash
+
+  # Log all output from this script
+  export RSESSION_LOG_FILE="<%= working_dir_container %>/rsession.log"
+
+  exec &>>"\${RSESSION_LOG_FILE}"
+
+  source "<%= working_dir_container %>/.env"
+
+  # Launch the original command
+  echo "Launching rsession..."
+  set -x
+  exec rsession --r-libs-user "${R_LIBS_USER}" "\${@}"
+EOL
+)
+chmod 700 "<%= working_dir_host %>/rsession.sh"
+echo $USERNAME
+# Set working directory to home directory
+cd "$PWD"
+
+# Output debug info
+module list
+hostname
+set -x
+mkdir -p ./tmp
+# Launch the RStudio Server
+echo "Starting up rserver..."
+
+# Dump environment without functions for use in rsession.sh, filtering readonly variables
+(set -o posix; set) | grep -vP '^(BASHOPTS|BASH_VERSINFO|EUID|PPID|SHELLOPTS|UID)' > "<%= working_dir_host %>/.env"
+
+# --contain is used to override the bindpaths specified in OSC's
+# singularity.conf which would otherwise conflict in /etc
+# using --contain requires us to bind mount in addition directories including
+# /dev and /proc
+# optional_tutorial_home_bind is used when include_tutorials to change the home
+# directory to get a clean environment without clobbering files
+export SINGULARITYENV_LD_LIBRARY_PATH="$LD_LIBRARY_PATH"
+
+singularity run --contain -B '/lustre:/lustre' -B 'tmp:/tmp'  \
+  "$RSTUDIO_SERVER_IMAGE" rserver \
+  --www-port "${port}" \
+  --auth-none 0 \
+  --auth-pam-helper-path "${RSTUDIO_AUTH}" \
+  --auth-encrypt-password 0 \
+  --rsession-path "${RSESSION_WRAPPER_FILE}"

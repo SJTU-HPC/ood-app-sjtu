@@ -14,7 +14,7 @@ attributes:
     label: "Desktop Instance Size"
     options:
       - [ "1core" ]
-      - [ "8core" ]
+      - [ "10core" ]
       - [ "40core" ]
       - [ "1gpu" ]
       - [ "4gpu" ]

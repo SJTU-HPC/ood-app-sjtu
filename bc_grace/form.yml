@@ -9,8 +9,8 @@ attributes:
     label: "Instance Size"
     options:
       - [ "1core" ]
-      - [ "8core" ]
-      - [ "16core" ]
+      - [ "10core" ]
+      - [ "20core" ]
       - [ "40core" ]
 
 form:

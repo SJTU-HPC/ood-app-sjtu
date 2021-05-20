@@ -10,13 +10,13 @@ script:
     - "-J studio_igv_1core"
     - "-n 1"
     <%- end -%>
-    <%- if instance_size == "8core" -%>
-    - "-J studio_igv_8core"
-    - "-n 8"
+    <%- if instance_size == "10core" -%>
+    - "-J studio_igv_10core"
+    - "-n 10"
     <%- end -%>
-    <%- if instance_size == "16core" -%>
-    - "-J studio_igv_16core"
-    - "-n 16"
+    <%- if instance_size == "20core" -%>
+    - "-J studio_igv_20core"
+    - "-n 20"
     <%- end -%>
     <%- if instance_size == "40core" -%>
     - "-J studio_igv_40core"

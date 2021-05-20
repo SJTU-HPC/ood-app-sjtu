@@ -10,9 +10,9 @@ script:
     - "-J studio_octave_1core"
     - "-n 1"
     <%- end -%>
-    <%- if instance_size == "16core" -%>
-    - "-J studio_octave_16core"
-    - "-n 16"
+    <%- if instance_size == "10core" -%>
+    - "-J studio_octave_10core"
+    - "-n 10"
     <%- end -%>
     <%- if instance_size == "40core" -%>
     - "-J studio_octave_40core"

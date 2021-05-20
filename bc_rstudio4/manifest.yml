@@ -1,0 +1,7 @@
+---
+name: RStudio Server (r4.0.2)
+category: Interactive Apps
+subcategory: Servers
+role: batch_connect
+description: |
+  This app will launch RStudio Server on the SJTU cluster.
